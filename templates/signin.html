@@ -1,0 +1,20 @@
+{% extends "authenticate.html" %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="{{ url_for('signin') }}" method="post">
+
+        <div>
+            {{ form.username }}
+        </div>
+        <div>
+            {{ form.email }}
+        </div>
+        {{ form.password }}
+        {{ form.confirm_password }}
+
+        {{ form.csrf_token }}
+    </form>
+{% endblock %}
