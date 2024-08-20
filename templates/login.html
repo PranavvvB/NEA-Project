@@ -1,0 +1,16 @@
+{% extends "authenticate.html" %}
+{% from "macros.html" import displayField %}
+
+{% block title %} Log In {% endblock %}
+
+{% block content %}
+    <h1>Log In</h1>
+    <form action="{{ url_for('login') }}" method="POST" novalidate>
+
+        {{ displayField(form.username, "Username", autocomplete="off") }}
+        {{ displayField(form.password, "Password") }}
+
+        {{ form.submit_button(value="Log In") }}
+        {{ form.csrf_token }}
+    </form>
+{% endblock %}

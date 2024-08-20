@@ -13,12 +13,24 @@ app.secret_key = "REPLACE KEY LATER"
 def signin():
 
     signup_form = SigninForm()
+
     if signup_form.validate_on_submit():
-        return "Sign Up successful"
+        return redirect(url_for("chat"))
     
 
     return render_template("signup.html", form=signup_form)
 
+@app.route("/login", methods=["GET",'POST'])
+def login():
+    login_form = LoginForm()
+
+    if login_form.validate_on_submit():
+        return redirect(url_for("chat"))
+
+@app.route("/chat", methods=["GET","POST"])
+def chat():
+
+    return render_template("chat.html")
    
 if __name__ == "__main__":
     app.run(debug=True)
