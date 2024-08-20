@@ -1,0 +1,14 @@
+<!-- This file is for macros that are used in the templates. -->
+<!-- Macros are used to avoid repeating code in the templates. -->
+
+{% macro displayField(field, fieldName) %}
+    <div class="form-group">
+        {{ field(class="form-control", placeholder=fieldName, **kwargs) }}
+        <!-- Error messages -->
+        <ul class="formError">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
