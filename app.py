@@ -24,7 +24,7 @@ def index():
 @app.route("/signup", methods=["GET","POST"])
 def signin():
 
-    signup_form = SigninForm()
+    signup_form = SignupForm()
 
     if signup_form.validate_on_submit():
         username = signup_form.username.data

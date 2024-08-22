@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField
-from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError
-from models import User
+from wtforms import StringField, PasswordField, EmailField, SubmitField 
+from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError #  built-in validators
+from models import User 
 
 def user_exists(form, username):
     """Checks if the username inputted by the user already exists in the database"""
@@ -31,7 +31,7 @@ def validate_credentials(form, field):
     elif password_inputted != user.password:
         raise ValidationError("Username or password is incorrect")
 
-class SigninForm(FlaskForm):
+class SignupForm(FlaskForm):
     # creates fields for the form to be filled out by the user and a submit button to submit the form
     username = StringField("username", validators=[InputRequired(message="Please enter a username"), Length(min=4, max=15, message="Username must be between 4 and 15 characters"), user_exists])
     email = EmailField("email", validators=[InputRequired(message="Please enter your email address"), Email(message="Invalid email"), email_exists])
