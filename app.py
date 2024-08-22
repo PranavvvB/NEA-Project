@@ -25,7 +25,6 @@ def index():
 def signin():
 
     signup_form = SigninForm()
-    flash("flash test", category="info")
 
     if signup_form.validate_on_submit():
         username = signup_form.username.data
@@ -36,7 +35,7 @@ def signin():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for("chat"))
+        return redirect(url_for("login"))
     
 
     return render_template("signup.html", form=signup_form)
@@ -47,6 +46,7 @@ def login():
 
     if login_form.validate_on_submit():
         return redirect(url_for("chat"))
+    return render_template("login.html", form=login_form)
 
 @app.route("/chat", methods=["GET","POST"])
 def chat():

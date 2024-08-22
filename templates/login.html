@@ -10,7 +10,7 @@
         {{ displayField(form.username, "Username", autocomplete="off") }}
         {{ displayField(form.password, "Password") }}
 
-        {{ form.submit_button(value="Log In") }}
+        {{ form.submit_button() }}
         {{ form.csrf_token }}
     </form>
 {% endblock %}

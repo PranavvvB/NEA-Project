@@ -12,7 +12,7 @@
         {{ displayField(form.password, "Password") }}
         {{ displayField(form.confirm_password, "Re-enter password") }}
 
-        {{ form.submit_button(value="Sign Up") }}
+        {{ form.submit_button() }}
         {{ form.csrf_token }}
     </form>
 {% endblock %}
