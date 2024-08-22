@@ -40,7 +40,7 @@ class SignupForm(FlaskForm):
     submit_button = SubmitField("Sign Up")
 
 class LoginForm(FlaskForm):
-    # similar to the SigninForm class, but with different fields and validators
+    # similar to the SignupForm class, but with different fields and validators
     username = StringField("username", validators=[InputRequired(message="Please enter your username")])
     password = PasswordField("password", validators=[InputRequired(message="Please enter your password"), validate_credentials])
     submit_button = SubmitField("Login")

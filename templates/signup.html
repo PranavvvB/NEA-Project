@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>Sign In</h1>
-    <form action="{{ url_for('signin') }}" method="POST" novalidate>
+    <form action="{{ url_for('signup') }}" method="POST" novalidate>
 
         {{ displayField(form.username, "Username", autocomplete="off") }}
         {{ displayField(form.email, "Email") }}

@@ -22,7 +22,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/signup", methods=["GET","POST"])
-def signin():
+def signup():
 
     signup_form = SignupForm()
 
