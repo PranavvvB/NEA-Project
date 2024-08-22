@@ -31,7 +31,10 @@ def signup():
         password = signup_form.password.data
         email = signup_form.email.data
 
-        user = User(username=username, email=email, password=password)
+        # Hashes email and password
+        hashed_password = pbkdf2_sha256.hash(password)
+
+        user = User(username=username, email=email, password=hashed_password)
         db.session.add(user)
         db.session.commit()
 

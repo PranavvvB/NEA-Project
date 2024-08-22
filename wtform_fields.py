@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField 
 from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError #  built-in validators
+from passlib.hash import pbkdf2_sha256
+
 from models import User 
 
 def user_exists(form, username):
@@ -21,15 +23,14 @@ def validate_credentials(form, field):
     password_inputted = form.password.data
 
     # queries the database for the user inputted by the user
-    user = User.query.filter_by(username=username_inputted).first()
+    user_data = User.query.filter_by(username=username_inputted).first()
     # checks if user exists in the database
-    if user is None:
+    if user_data is None:
         raise ValidationError("Username or password is incorrect")
-    
-    # raises an error if the password inputted does not match the password in the database
-    # effectively checks if the password is correct
-    elif password_inputted != user.password:
+    # checks if the password inputted by the user matches the hashed password stored in the database
+    elif not pbkdf2_sha256.verify(password_inputted, user_data.password):
         raise ValidationError("Username or password is incorrect")
+
 
 class SignupForm(FlaskForm):
     # creates fields for the form to be filled out by the user and a submit button to submit the form
