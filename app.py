@@ -1,6 +1,6 @@
 import os
 from flask import Flask, url_for, redirect, render_template, flash
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_migrate import Migrate
 
 from wtform_fields import *
@@ -68,7 +68,7 @@ def login():
         user_object = User.query.filter_by(username=login_form.username.data).first()
         login_user(user_object) # logs in the user
 
-        flash("Logged in successfully", "success")
+        flash(f"Logged in successfully as {current_user.username}", "success")
         return redirect(url_for("chat"))
     
     return render_template("login.html", form=login_form)
@@ -80,6 +80,7 @@ def chat():
     return render_template("chat.html")
 
 @app.route("/logout", methods=["GET"])
+@login_required
 def logout():
     logout_user()
 
