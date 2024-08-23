@@ -3,7 +3,6 @@ from flask import Flask, url_for, redirect, render_template, flash
 from flask_login import LoginManager, login_user, login_required, logout_user
 from flask_migrate import Migrate
 
-
 from wtform_fields import *
 from models import *
 
@@ -17,11 +16,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "data
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False  # prevents "significant amount of overhead to every session"
 
-
-migrate = Migrate(app, db)
-
 # initialise database
 db.init_app(app)
+with app.app_context():
+    db.create_all()
+
+migrate = Migrate(app, db)
 
 # configure flask login
 login = LoginManager(app)
@@ -87,8 +87,6 @@ def logout():
     return redirect(url_for("login"))
    
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
 
 # app local browser link : http://127.0.0.1:5000/
