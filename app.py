@@ -61,6 +61,10 @@ def signup():
 
 @app.route("/login", methods=["GET","POST"])
 def login():
+
+    if current_user.is_authenticated:
+        flash("You are already logged in", "info")
+        return redirect(url_for("chat"))
     login_form = LoginForm()
 
     # validates the form when the user submits it
